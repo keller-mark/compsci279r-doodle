@@ -1,10 +1,8 @@
-:root {
-  --body-font: "Recursive", sans-serif;
-}
-
+/* Style the app so that it looks more like Doodle. */
 body {
   margin: 0;
-  font-family: var(--body-font);
+  /* Use a sans-serif font. */
+  font-family: sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -12,6 +10,7 @@ h1 {
   margin-left: 10px;
 }
 .app {
+  /* Use CSS flexbox. */
   display: flex;
   flex-direction: row;
 }

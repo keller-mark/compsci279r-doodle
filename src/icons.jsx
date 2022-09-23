@@ -1,5 +1,6 @@
-// Copied SVG elements from doodle.com and right-clicking to inspect element.
-// In Safari's Web Inspector, right-click <svg/> element -> Copy -> HTML
+// Copied SVG elements from doodle.com by right-clicking to inspect element.
+// In Safari's Web Inspector, right-click <svg/> element -> Copy -> HTML.
+// Each react component returns the <svg/> element.
 export function YesIcon() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-label="Checkmark" aria-hidden="true" width="24" height="24" style={{ top: '2px', left: '0px', width: '20px', height: '20px' }}>

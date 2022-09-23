@@ -1,11 +1,13 @@
-import { useState, useEffect, useMemo, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import clsx from 'clsx';
 import sum from 'lodash/sum';
 import { YesIcon, MaybeIcon, NoIcon, PendingIcon, GroupIcon, DescriptionIcon, GlobeIcon, PlaceIcon } from './icons';
 
+// Set up constants to convert numeric days of the week to short strings.
 const days = [
   'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'
 ];
+// Set up constants to convert numeric months to short strings.
 const months = [
   'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
 ];
