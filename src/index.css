@@ -8,6 +8,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+h1 {
+  margin-left: 10px;
+}
 .app {
   display: flex;
   flex-direction: row;
@@ -50,6 +53,9 @@ body {
   flex-direction: row;
   margin-bottom: 10px;
 }
+.footer-row span {
+  margin: 10px 5px;
+}
 .name {
   font-weight: bold;
 }
@@ -57,12 +63,12 @@ body {
   display: flex;
   flex-direction: column;
   width: 100px;
-  border: 1px solid orange;
+  border: 0px solid orange;
   text-transform: uppercase;
 }
 .datetime-col span {
   text-align: center;
-  margin-bottom: 5px;
+  margin-top: 5px;
 }
 .datetime-col span:first-child {
   font-size: 14px;
@@ -75,16 +81,26 @@ body {
 }
 
 .you-row {
-  height: 150px;
-  border: 1px solid blue;
+  height: 170px;
+  border: 0px solid blue;
+}
+.you-row .datetime-col {
+  cursor: pointer;
+}
+.you-row .datetime-col:hover {
+  background-color: rgb(248, 249, 250);
+}
+.summary-row {
+  margin-top: 10px;
 }
 .friend-row {
   height: 100px;
-  border: 1px solid red;
+  border: 0px solid red;
+  margin-top: 10px;
 }
 .name-col {
   width: 200px;
-  border: 1px solid green;
+  border: 0px solid green;
   display: flex;
   flex-direction: column;
 }
@@ -95,4 +111,92 @@ body {
 
 .you-row .grow-el {
   flex-grow: 2;
+}
+
+.yes-primary {
+  color: rgb(81, 125, 15);
+  background-color: rgb(235, 247, 212);
+}
+.yes-secondary {
+  color: rgb(81, 125, 15);
+}
+.maybe-primary {
+  color: rgb(147, 110, 16);
+  fill: rgb(147, 110, 16);
+  background-color: rgb(255, 240, 178);
+}
+.maybe-secondary {
+  color: rgb(147, 110, 16);
+  fill: rgb(147, 110, 16);
+}
+.no-primary {
+  color: rgb(106, 118, 133);
+  background-color: rgb(248, 249, 250);
+}
+.info-icon {
+  display: inline-block;
+  margin-right: 5px;
+  position: relative;
+}
+.info-icon svg {
+  top: 3px;
+  position: relative;
+}
+.info-icon-box {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  vertical-align: middle;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  position: relative;
+  border-radius: 2px;
+}
+.info-icon-box svg, .checkstate svg, .checkbox svg {
+  width: 24px;
+  height: 24px;
+  position: relative;
+}
+
+.checkbox {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  vertical-align: middle;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  position: relative;
+  border-radius: 2px;
+  margin: 5px auto;
+  border: 1px solid rgb(106, 118, 133);
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: white;
+}
+.checkbox:not(.disabled):hover {
+  border: 1px solid black;
+}
+.checkbox.disabled {
+  background-color: rgb(106, 118, 133);
+}
+.checkstate {
+  display: inline-block;
+  width: calc(100% - 10px);
+  height: 24px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-align: center;
+  vertical-align: middle;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  position: relative;
+  border-radius: 2px;
+  margin: 5px auto;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.checkstate.disabled {
+  background-color: rgb(106, 118, 133);
 }
