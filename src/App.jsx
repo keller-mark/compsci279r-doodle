@@ -13,7 +13,7 @@ const months = [
 ];
 
 // Use a constant object to name the three possible checkbox state values.
-const STATE = {
+export const STATE = {
   NO: 0,
   YES: 1,
   MAYBE: 2,
@@ -25,59 +25,6 @@ const shortTime = new Intl.DateTimeFormat("en", {
   timeStyle: "short"
 });
 
-// Hard-code the event details, participant names, and the time slots.
-const organizer = 'Jane Doe';
-// Store a list of participant names who have already filled out the poll.
-const friends = [
-  'Jane Doe',
-  'John Doe',
-];
-// Store a list of time slot objects.
-const timeslots = [
-  {
-    // Use the JS date object.
-    // Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
-    start: new Date("September 21, 2022 04:00:00"),
-    end: new Date("September 21, 2022 08:00:00"),
-    states: {
-      // Store the selection of each participant for this time slot.
-      'John Doe': STATE.YES,
-      'Jane Doe': STATE.NO,
-    }
-  },
-  {
-    start: new Date("December 24, 2022 10:00:00"),
-    end: new Date("December 24, 2022 12:00:00"),
-    states: {
-      'John Doe': STATE.NO,
-      'Jane Doe': STATE.NO,
-    }
-  },
-  {
-    start: new Date("December 24, 2022 12:00:00"),
-    end: new Date("December 24, 2022 13:00:00"),
-    states: {
-      'John Doe': STATE.YES,
-      'Jane Doe': STATE.YES,
-    }
-  },
-  {
-    start: new Date("December 25, 2022 13:00:00"),
-    end: new Date("December 25, 2022 15:00:00"),
-    states: {
-      'John Doe': STATE.NO,
-      'Jane Doe': STATE.MAYBE,
-    }
-  },
-  {
-    start: new Date("December 26, 2022 10:00:00"),
-    end: new Date("December 26, 2022 15:00:00"),
-    states: {
-      'John Doe': STATE.NO,
-      'Jane Doe': STATE.MAYBE,
-    }
-  }
-];
 
 // Create a component to represent the "you" part of a timeslot column.
 // (The clickable upper part of each column with the date/time and the checkbox).
@@ -139,7 +86,7 @@ function YouTimeCol(props) {
 function SummaryTimeCol(props) {
   const {
     start,
-    states
+    states,
   } = props;
 
   // Check if the timeslot is in the past.
@@ -253,7 +200,13 @@ function EventInfo() {
 
 // Define the top-level <App/> component
 // which is exported and rendered from ./main.jsx.
-function App() {
+function App(props) {
+  const {
+    organizer,
+    friends,
+    timeslots,
+    clearTask,
+  } = props;
   return (
     <div>
       {/* The app title */}
@@ -319,7 +272,7 @@ function App() {
             <div className="footer-row">
               <span><button>Decline</button></span>
               <p>Selecting more times makes it easier to find the best option.</p>
-              <span><button>Continue</button></span>
+              <span><button onClick={clearTask}>Continue</button></span>
             </div>
           </div>
         </div>
