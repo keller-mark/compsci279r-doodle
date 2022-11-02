@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import clsx from 'clsx';
 import sum from 'lodash/sum';
 import { YesIcon, MaybeIcon, NoIcon, PendingIcon, GroupIcon, DescriptionIcon, GlobeIcon, PlaceIcon } from './icons';
+import { STATE } from './timeslots';
 
 // Set up constants to convert numeric days of the week to short strings.
 const days = [
@@ -11,13 +12,6 @@ const days = [
 const months = [
   'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
 ];
-
-// Use a constant object to name the three possible checkbox state values.
-export const STATE = {
-  NO: 0,
-  YES: 1,
-  MAYBE: 2,
-};
 
 // Create a global time formatter object.
 // Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat
@@ -33,6 +27,7 @@ function YouTimeCol(props) {
     // Take the start and end datetime as props.
     start,
     end,
+    onCheck,
   } = props;
 
   // Set this checkbox to disabled if the time slot
@@ -46,6 +41,10 @@ function YouTimeCol(props) {
   // Store the state of this time slot,
   // and initialize it to the unavailable state.
   const [checkState, setCheckState] = useState(STATE.NO);
+
+  useEffect(() => {
+    onCheck(checkState);
+  }, [checkState]);
 
   // Use a React effect to set up the click handler
   // on the outer <div/>.
@@ -170,7 +169,7 @@ function Checkbox(props) {
 function EventInfo() {
   return (
     <div className="event-info">
-      <p><span className="name">Mark Keller</span> is organizing</p>
+      <p><span className="name">Mark</span> is organizing</p>
       <h3>Barbecue</h3>
       <h4><span className="info-icon"><PlaceIcon/></span>Boston</h4>
       <h4><span className="info-icon"><GlobeIcon/></span>United States - New York City</h4>
@@ -207,6 +206,13 @@ function App(props) {
     timeslots,
     clearTask,
   } = props;
+
+  const [checkedTimeslots, setCheckedTimeslots] = useState(timeslots);
+
+  function handleSubmit() {
+    clearTask(checkedTimeslots);
+  }
+
   return (
     <div>
       {/* The app title */}
@@ -240,8 +246,13 @@ function App(props) {
                 <span className="grow-el"/>
                 <span>You</span>
               </div>
-              {timeslots.map(timeslot => (
-                <YouTimeCol key={timeslot.start} start={timeslot.start} end={timeslot.end} />
+              {timeslots.map((timeslot, i) => (
+                <YouTimeCol key={timeslot.start} start={timeslot.start} end={timeslot.end} onCheck={(state) => {
+                  setCheckedTimeslots(prev => {
+                    prev[i].you = state;
+                    return prev;
+                  });
+                }} />
               ))}
             </div>
             {/* The middle row of the body displays the summary (number of people who are available) for each slot. */}
@@ -267,12 +278,11 @@ function App(props) {
           {/* The footer of the interface contains more buttons. These buttons do not have click handlers but would in a full-featured implementation. */}
           <div className="options-footer">
             <div className="footer-row">
-              You are the first participant to respond
+              You are the first participant to respond.
             </div>
             <div className="footer-row">
-              <span><button>Decline</button></span>
               <p>Selecting more times makes it easier to find the best option.</p>
-              <span><button onClick={clearTask}>Continue</button></span>
+              <span><button onClick={handleSubmit}>Continue</button></span>
             </div>
           </div>
         </div>
