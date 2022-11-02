@@ -17,7 +17,6 @@ export default function Intro() {
   const [startTime, setStartTime] = useState();
   const [endTime, setEndTime] = useState();
   const [prevTask, setPrevTask] = useState();
-  // TODO: render user selections after task is done
   const [userSelections, setUserSelections] = useState();
 
   const startTask = useCallback((taskType) => {
@@ -40,7 +39,8 @@ export default function Intro() {
     return (
       <>
         <div>Previous task {TASK_REV[prevTask]} took {Math.floor(delta / 1000)} seconds</div>
-        <pre>{JSON.stringify(userSelections, null, 2)}</pre>
+        {/* TODO: clear the timeslot.state property before displaying user selections */}
+        <pre>{JSON.stringify(userSelections.map(timeslot => ({ ...timeslot, states: undefined })), null, 2)}</pre>
       </>
     );
   }, [endTime]);
@@ -51,15 +51,15 @@ export default function Intro() {
         <div>
           <p>{message}</p>
           <p>
-            <button onClick={() => startTask(TASK.T1_W1)}>Task 1 (Jan 2)</button>
-            <button onClick={() => startTask(TASK.T2_W1)}>Task 2 (next week)</button>
+            <button onClick={() => startTask(TASK.T1_WA)}>Task 1 (Jan 2)</button>
+            <button onClick={() => startTask(TASK.T2_WA)}>Task 2 (next week)</button>
             <br/><br/>
-            <button onClick={() => startTask(TASK.T1_W2)}>Task 1 (Jan 9)</button>
-            <button onClick={() => startTask(TASK.T2_W2)}>Task 2 (two weeks)</button>
+            <button onClick={() => startTask(TASK.T1_WB)}>Task 1 (Jan 9)</button>
+            <button onClick={() => startTask(TASK.T2_WB)}>Task 2 (two weeks)</button>
           </p>
         </div>
       ) : null}
-      {currTask === TASK.T1_W1 ? (
+      {currTask === TASK.T1_WA ? (
         <App
           organizer={organizer}
           friends={friends}
@@ -67,7 +67,7 @@ export default function Intro() {
           clearTask={clearTask}
         />
       ) : null}
-      {currTask === TASK.T1_W2 ? (
+      {currTask === TASK.T1_WB ? (
         <App
           organizer={organizer}
           friends={friends}
@@ -75,7 +75,7 @@ export default function Intro() {
           clearTask={clearTask}
         />
       ) : null}
-      {currTask === TASK.T2_W1 ? (
+      {currTask === TASK.T2_WA ? (
         <App
           organizer={organizer}
           friends={friends}
@@ -83,7 +83,7 @@ export default function Intro() {
           clearTask={clearTask}
         />
       ) : null}
-      {currTask === TASK.T2_W2 ? (
+      {currTask === TASK.T2_WB ? (
         <App
         organizer={organizer}
           friends={friends}
