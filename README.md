@@ -2,7 +2,7 @@
 
 ## How to open hosted version
 
-Navigate to https://keller-mark.github.io/compsci279r-doodle/ in a web browser.
+Navigate to https://keller-mark.github.io/compsci279r-doodle/?task=1&week=a in a web browser.
 
 ## How to open locally
 
