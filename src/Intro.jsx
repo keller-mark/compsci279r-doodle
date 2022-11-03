@@ -61,11 +61,8 @@ export default function Intro() {
     if(prevTask === null || prevTask === undefined) {
       return 'No previous task.';
     }
-    const delta = endTime - startTime;
     return (
-      <>
-        <div>Previous task {TASK_REV[prevTask]} info saved.</div>
-      </>
+      <div>Previous task {TASK_REV[prevTask]} info saved.</div>
     );
   }, [endTime]);
 
